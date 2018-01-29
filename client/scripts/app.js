@@ -22,9 +22,9 @@ var Movies = Backbone.Collection.extend({
   model: Movie,
 
   initialize: function() {
-    //
-    this.on('change', function() {
-      this.set('comparator');
+    // Click Handler: Sets the Comparator to event
+    this.on('change', function(event) {
+      this.set('comparator', event);
     });
   },
 
@@ -81,8 +81,8 @@ var MovieView = Backbone.View.extend({
   },
 
   handleClick: function() {
-    // your code here
-    
+    // Access the toggleLike function from the Model and invoke toggleLike
+    this.model.toggleLike();
   },
 
   render: function() {
