@@ -23,7 +23,8 @@ var Movies = Backbone.Collection.extend({
   initialize: function() {
     // Click Handler
     this.on('change', function() {
-      this.set('comparator');
+      // Sort the Data
+      this.sort();
     });
   },
 
@@ -71,10 +72,7 @@ var MovieView = Backbone.View.extend({
 
   initialize: function() {
     // Re-render when the model changes
-    this.on('change', function() {
-      this.render();
-    });
-
+    this.render();
   },
 
   events: {
@@ -99,10 +97,8 @@ var MoviesView = Backbone.View.extend({
 
   initialize: function() {
     // Re-render when the model changes
-    this.on('change', function() {
-      this.sort();
-      this.render();
-    });
+    // this.render();
+    this.listenTo(this.collection, "sort", this.render);
   },
 
   render: function() {
