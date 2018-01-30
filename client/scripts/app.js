@@ -22,7 +22,7 @@ var Movies = Backbone.Collection.extend({
 
   initialize: function() {
     // Click Handler
-    this.on('toggleLike', function() {
+    this.on('change', function() {
       this.set('comparator');
     });
   },
@@ -101,6 +101,7 @@ var MoviesView = Backbone.View.extend({
     // Re-render when the model changes
     this.on('change', function() {
       this.sort();
+      this.render();
     });
   },
 
