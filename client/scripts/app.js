@@ -12,7 +12,6 @@ var Movie = Backbone.Model.extend({
     // If the State is False, set Like to True
       this.set('like', true);
     }
-    
   }
 
 });
@@ -22,9 +21,9 @@ var Movies = Backbone.Collection.extend({
   model: Movie,
 
   initialize: function() {
-    // Click Handler: Sets the Comparator to event
-    this.on('change', function(event) {
-      this.set('comparator', event);
+    // Click Handler
+    this.on('toggleLike', function() {
+      this.set('comparator');
     });
   },
 
@@ -72,7 +71,9 @@ var MovieView = Backbone.View.extend({
 
   initialize: function() {
     // Re-render when the model changes
-    this.render();
+    this.on('change', function() {
+      this.render();
+    });
 
   },
 
@@ -83,6 +84,8 @@ var MovieView = Backbone.View.extend({
   handleClick: function() {
     // Access the toggleLike function from the Model and invoke toggleLike
     this.model.toggleLike();
+    // Render Page
+    this.render();
   },
 
   render: function() {
@@ -96,7 +99,9 @@ var MoviesView = Backbone.View.extend({
 
   initialize: function() {
     // Re-render when the model changes
-    this.render();
+    this.on('change', function() {
+      this.sort();
+    });
   },
 
   render: function() {
